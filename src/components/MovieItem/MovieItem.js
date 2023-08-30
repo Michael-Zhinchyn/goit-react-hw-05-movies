@@ -49,7 +49,16 @@ const MovieItem = () => {
       </StyledMovieWrapper>
       <hr></hr>
       <p>Additional information</p>
-      <Link to={`/movies/${id}/cast`}>Cast</Link>
+      <div>
+        <ul>
+          <li>
+            <Link to={`/movies/${id}/cast`}>Cast</Link>
+          </li>
+          <li>
+            <Link to={`/movies/${id}/reviews`}>Reviews</Link>
+          </li>
+        </ul>
+      </div>
       <Outlet />
     </>
   );
