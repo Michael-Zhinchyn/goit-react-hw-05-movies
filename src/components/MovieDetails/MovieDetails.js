@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { getMovies } from 'services/Movies-API';
-import { StyledMovieWrapper } from './MovieItem.styled';
+import { StyledMovieWrapper } from './MovieDetails.styled';
 
-const MovieItem = () => {
+const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [genres, setGenres] = useState([]);
@@ -64,4 +64,4 @@ const MovieItem = () => {
   );
 };
 
-export default MovieItem;
+export default MovieDetails;
