@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { getMovies } from 'services/Movies-API';
 import { StyledMovieWrapper } from './MovieItem.styled';
 
@@ -32,17 +32,26 @@ const MovieItem = () => {
   const { title, overview, poster_path } = movie;
 
   return (
-    <StyledMovieWrapper>
-      <img src={`https://image.tmdb.org/t/p/w300${poster_path}`}></img>
-      <div>
-        <h2>{title}</h2>
-        <p>User Score: {movieScore} %</p>
-        <b>Overview</b>
-        <p>{overview}</p>
-        <b>Genres: </b>
-        <p>{movieGenres}</p>
-      </div>
-    </StyledMovieWrapper>
+    <>
+      <StyledMovieWrapper>
+        <img
+          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          alt={`poster of ${title} movie`}
+        ></img>
+        <div>
+          <h2>{title}</h2>
+          <p>User Score: {movieScore} %</p>
+          <b>Overview</b>
+          <p>{overview}</p>
+          <b>Genres: </b>
+          <p>{movieGenres}</p>
+        </div>
+      </StyledMovieWrapper>
+      <hr></hr>
+      <p>Additional information</p>
+      <Link to={`/movies/${id}/cast`}>Cast</Link>
+      <Outlet />
+    </>
   );
 };
 
