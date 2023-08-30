@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovies } from 'services/Movies-API';
 
+const emptyImage =
+  'https://apps-mea.element.com/SIMS/Images/loginhead.jpg?AspxAutoDetectCookieSupport=1';
+
 const Cast = () => {
   const { id } = useParams();
 
@@ -30,7 +33,11 @@ const Cast = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w200${profile_path}`}
                 alt={name}
-              ></img>
+                onError={e => {
+                  e.target.onerror = null;
+                  e.target.src = emptyImage;
+                }}
+              />
               <p>{name}</p>
             </li>
           );
