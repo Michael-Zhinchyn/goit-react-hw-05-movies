@@ -13,6 +13,7 @@ export const Layout = () => {
           </li>
         </ul>
       </nav>
+      <hr></hr>
       <main>
         <Outlet />
       </main>
