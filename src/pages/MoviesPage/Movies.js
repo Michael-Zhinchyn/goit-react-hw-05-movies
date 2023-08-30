@@ -1,8 +1,11 @@
+import { SearchBox } from 'components/SearchMovies/SearchForm';
+import { useSearchParams } from 'react-router-dom';
+
 const Movies = () => {
   return (
-    <div>
-      <h2>Movie Page</h2>
-    </div>
+    <>
+      <SearchBox />
+    </>
   );
 };
 
