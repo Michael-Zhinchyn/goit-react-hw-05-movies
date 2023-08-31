@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import Home from 'pages/HomePage/Home';
 import Movies from 'pages/MoviesPage/Movies';
@@ -21,6 +22,7 @@ export const App = () => {
           <Route path="*" element={<div>404 Not Found</div>}></Route>
         </Route>
       </Routes>
+      <Toaster />
     </div>
   );
 };
