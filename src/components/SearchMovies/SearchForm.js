@@ -16,8 +16,8 @@ export const SearchBox = () => {
   }, [searchParams]);
 
   const fetchMoviesByQuery = async query => {
-    if (!query.trim()) {
-      toast.error('Please enter a search term!');
+    if (!query || !query.trim()) {
+      toast.error("You didn't enter anything for the search.");
       return;
     }
 
@@ -33,7 +33,9 @@ export const SearchBox = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const query = searchParams.get('searchQuery');
+
+    const query = e.target.elements.query.value;
+    setSearchParams({ searchQuery: query });
     fetchMoviesByQuery(query);
     e.target.reset();
   };
@@ -46,7 +48,6 @@ export const SearchBox = () => {
           name="query"
           placeholder="Search movies..."
           autoComplete="off"
-          onChange={evt => setSearchParams({ searchQuery: evt.target.value })}
         ></input>
         <button type="submit">Search</button>
       </form>
