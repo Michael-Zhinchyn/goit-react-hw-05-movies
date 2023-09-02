@@ -29,7 +29,7 @@ const MovieDetails = () => {
   const movieGenres = genres.map(genre => genre.name).join(', ');
   const movieScore = (movieVotes * 10).toFixed(0);
 
-  if (!movie) return <div>Завантаження...</div>;
+  if (!movie) return <div>Loading...</div>;
 
   const { title, overview, poster_path } = movie;
 
