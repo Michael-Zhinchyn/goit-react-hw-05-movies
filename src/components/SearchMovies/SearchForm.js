@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import { MovieList } from 'components/MoviesList/MoviesList';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovies } from 'services/Movies-API';
 
@@ -8,14 +8,7 @@ export const SearchBox = () => {
   const [moviesByQuery, setMoviesByQuery] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const query = searchParams.get('searchQuery');
-    if (query) {
-      fetchMoviesByQuery(query);
-    }
-  }, [searchParams]);
-
-  const fetchMoviesByQuery = async query => {
+  const fetchMoviesByQuery = useCallback(async query => {
     if (!query || !query.trim()) {
       toast.error("You didn't enter anything for the search.");
       return;
@@ -29,13 +22,21 @@ export const SearchBox = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const query = searchParams.get('searchQuery');
+    if (query) {
+      fetchMoviesByQuery(query);
+    }
+  }, [searchParams, fetchMoviesByQuery]);
 
   const handleSubmit = e => {
     e.preventDefault();
-
     const query = e.target.elements.query.value;
-    setSearchParams({ searchQuery: query });
+    const updateParams = query !== '' ? { searchQuery: query } : {};
+    setSearchParams(updateParams);
+
     fetchMoviesByQuery(query);
     e.target.reset();
   };
