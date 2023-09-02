@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovies } from 'services/Movies-API';
 import { StyledMovieWrapper } from './MovieDetails.styled';
@@ -62,7 +62,9 @@ const MovieDetails = () => {
           </li>
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={<div>Loading</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
