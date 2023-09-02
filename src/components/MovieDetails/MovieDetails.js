@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovies } from 'services/Movies-API';
 import { StyledMovieWrapper } from './MovieDetails.styled';
@@ -9,7 +9,7 @@ const MovieDetails = () => {
   const [genres, setGenres] = useState([]);
   const [movieVotes, setMovieVotes] = useState(null);
   const location = useLocation();
-  const backLocation = location.state?.from ?? '/';
+  const backLocation = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const getMovieDetails = async id => {
@@ -41,7 +41,7 @@ const MovieDetails = () => {
           alt={`poster of ${title} movie`}
         ></img>
         <div>
-          <Link to={backLocation}>Back</Link>
+          <Link to={backLocation.current}>Back</Link>
           <h2>{title}</h2>
           <p>User Score: {movieScore} %</p>
           <b>Overview</b>
